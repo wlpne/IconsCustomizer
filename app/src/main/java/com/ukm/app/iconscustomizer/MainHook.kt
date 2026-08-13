@@ -54,34 +54,35 @@ class MainHook : XposedModule() {
     }
 
     override fun onPackageLoaded(packageParam: XposedModuleInterface.PackageLoadedParam) {
-        super.onPackageLoaded(packageParam)
-        when (packageParam.packageName) {
-            "com.miui.home" -> {
-                isThemedIconEnabled = prefManager?.getBoolean("enable_themed_icons", false) ?: false
-                isDockEnabled = prefManager?.getBoolean("enable_dock", false) ?: false
-                themeHomeScreenOnly =
-                    prefManager?.getBoolean("themed_icons_homescreen_only", false) ?: false
-                isThemeDockFolderEnabled =
-                    prefManager?.getBoolean("theme_dock_folder", false) ?: false
-                isThemedClockEnabled =
-                    prefManager?.getBoolean("enable_themed_clock", false) ?: false
-                iconPackPackageName = prefManager?.getString("icon_pack", "none") ?: "none"
-                dockCornerRadius = prefManager?.getInt("dock_corner_radius", 60) ?: 60
-                if (isThemeDockFolderEnabled) {
-                    dockFolderBgColor = prefManager?.getInt("monet_folder_dock_bg_color", 0) ?: 0
-                    dockFolderOpacity = prefManager?.getInt("dock_folder_opacity", 200) ?: 200
-                }
-                if (isThemedClockEnabled) {
-                    clockWidgetColor = prefManager?.getInt("monet_clock_color", 0) ?: 0
-                }
-
-                iconSize = prefManager?.getInt("icon_size", 180) ?: 180
-                hookLauncher(packageParam)
+    super.onPackageLoaded(packageParam)
+    when (packageParam.packageName) {
+        "com.miui.home", "com.mi.android.globallauncher" -> {
+            isThemedIconEnabled = prefManager?.getBoolean("enable_themed_icons", false) ?: false
+            isDockEnabled = prefManager?.getBoolean("enable_dock", false) ?: false
+            themeHomeScreenOnly =
+                prefManager?.getBoolean("themed_icons_homescreen_only", false) ?: false
+            isThemeDockFolderEnabled =
+                prefManager?.getBoolean("theme_dock_folder", false) ?: false
+            isThemedClockEnabled =
+                prefManager?.getBoolean("enable_themed_clock", false) ?: false
+            iconPackPackageName = prefManager?.getString("icon_pack", "none") ?: "none"
+            dockCornerRadius = prefManager?.getInt("dock_corner_radius", 60) ?: 60
+            if (isThemeDockFolderEnabled) {
+                dockFolderBgColor = prefManager?.getInt("monet_folder_dock_bg_color", 0) ?: 0
+                dockFolderOpacity = prefManager?.getInt("dock_folder_opacity", 200) ?: 200
+            }
+            if (isThemedClockEnabled) {
+                clockWidgetColor = prefManager?.getInt("monet_clock_color", 0) ?: 0
             }
 
-            else -> return
+            iconSize = prefManager?.getInt("icon_size", 180) ?: 180
+            hookLauncher(packageParam)
         }
+
+        else -> return
     }
+}
+
 
     private fun hookLauncher(packageParam: XposedModuleInterface.PackageLoadedParam) {
         val classLoader = packageParam.defaultClassLoader
