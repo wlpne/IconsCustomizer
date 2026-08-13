@@ -9,9 +9,16 @@ object UIHelpers {
 
     fun restartLauncher(context: Context): Boolean {
         return try {
-            val intent = android.content.Intent("com.ukm.app.RELOAD_ICONS")
-            intent.setPackage("com.miui.home")
-            context.sendBroadcast(intent)
+            val intentMiui = android.content.Intent("com.ukm.app.RELOAD_ICONS").apply {
+                setPackage("com.miui.home")
+            }
+            context.sendBroadcast(intentMiui)
+
+            val intentPoco = android.content.Intent("com.ukm.app.RELOAD_ICONS").apply {
+                setPackage("com.mi.android.globallauncher")
+            }
+            context.sendBroadcast(intentPoco)
+
             true
         } catch (e: Exception) {
             e.printStackTrace()
