@@ -10,8 +10,6 @@ An advanced Xposed/LSPosed module designed to bring ultimate icon customization 
 > **⚠️ Developer Note:**
 > I originally created this project for my own personal use. Please do not expect immediate updates or quick bug fixes! If you run into issues, feel free to report them on [GitHub Issues](../../issues) or on my Reddit post, and I will try my best to fix them whenever I have free time.
 
-> **⚠️ Notice:**
-> This is a *fork* maintained by [wlpne](https://github.com/wlpne). I created it to fix the scope issue for global ROM's (especially for POCO Launcher [com.mi.android.globallauncher])
 
 ## 📸 Screenshots
 
